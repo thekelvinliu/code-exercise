@@ -1,0 +1,11 @@
+name = "stable-kelvinliu-fun-worker"
+type = "webpack"
+account_id = "FIXME"
+compatibility_date = "2021-09-24"
+
+[env.local]
+workers_dev = true
+
+[env.prod]
+route = "stable.kelvinliu.fun/*"
+zone_id = "FIXME"

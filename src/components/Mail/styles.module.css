@@ -1,0 +1,9 @@
+.mailCard {
+  min-height: 32vh;
+}
+
+.mailCardImg {
+  cursor: pointer;
+  height: 125px;
+  width: auto;
+}

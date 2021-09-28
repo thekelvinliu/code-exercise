@@ -1,72 +1,49 @@
-# Stable | Code Exercise
+# stable-demo
 
-For this exercise, you'll implement a simple web application for users to view physical mail they've recently received at a Stable facility. Once the web application is complete, you'll deploy it for anyone with the public url to view.
+coding exercise for stable
 
-This exercise should take 2 - 4 hours to complete. 
+## about
 
-### Business Requirements
-* The web application resembles the provided mock ups
-* The web application is accessible from the public internet
+this project is a demo for [stable](https://www.usestable.com/).
+it is a serverless deployment;
+api endpoints run on [cloudflare workers](https://workers.cloudflare.com/),
+and static resources are uploaded to [backblaze b2](https://www.backblaze.com/b2/cloud-storage.html).
 
-### Technical Requirements
-* Users can view 6 mail items per page, with a maximum of 3 mail items per row
-* Users can click through multiple pages when there are more than 6 mail items to display
-* Users can easily interact with the web application in all screen sizes
-* The mock mail item data provided in the data.json file is served to the frontend via an endpoint
-* The codebase is pushed to a remote repository
+## developer guide
 
-### Resources
-* Assets
-	* [Stable Logo](https://s3-us-west-2.amazonaws.com/usestable.com-assets/logos/stable-logo.svg)
-	* [Business Icon](https://s3-us-west-2.amazonaws.com/usestable.com-assets/icons/company.svg)
-	* [Individual Icon](https://s3-us-west-2.amazonaws.com/usestable.com-assets/icons/recipient.svg)
-	* [Scan Icon](https://s3-us-west-2.amazonaws.com/usestable.com-assets/icons/scan.svg)
-	* [Shred Icon](https://s3-us-west-2.amazonaws.com/usestable.com-assets/icons/shred.svg)
-	* [Forward Icon](https://s3-us-west-2.amazonaws.com/usestable.com-assets/icons/forward.svg)
-	* [Processing Icon](https://s3-us-west-2.amazonaws.com/usestable.com-assets/icons/processing.svg)
-* Colors
-	* Primary: #3066BE;
-	* Secondary: #606060;
-	* Success: #85FFC7;
-	* Danger: #E63946;
-	* Light: #FAFCFF;
-	* Dark: #080708;
-* Fonts
-	* [Noto Sans](https://fonts.google.com/specimen/Noto+Sans)
-* [Mock ups](https://www.figma.com/file/gLBkzFfAl8DttHK0jvYTFK/Engineering-Exercise?node-id=0%3A1)
+- clone the repo
+  ```sh
+  $ git clone git@github.com:thekelvinliu/stable-code-exercise.git
+  ```
+- install dependencies
+  ```sh
+  $ yarn install --frozen-lockfile
+  ```
+- start development server
+  ```sh
+  $ yarn dev
+  ```
+- make production build
+  ```sh
+  $ yarn build
+  ```
+- upload contents of `bucket` to b2
+  ```sh
+  $ python3 -m venv .venv
+  $ source .venv/bin/activate
+  $ pip install b2
+  $ b2 sync bucket/ b2://static-resource-bucket/
+  ```
+- update `wrangler.toml` with real account id and zone id values
+- ship it!
+  ```sh
+  $ yarn deploy
+  ```
 
-### Schema
-##### Defined in GraphQL Schema Language
-```
-type MailItem {
-	id: String!
+## tech & tools
 
-	businessRecipient: String
-	forward: ActionDetails
-	from: String!
-	imageUrl: String!
-	individualRecipient: String
-	scan: ActionDetails
-	shred: ActionDetails
-	timestamp: Number!
-}
-
-
-type ActionDetails {
-	status: Status!
-}
-
-enum Status {
-	completed
-	processing
-}
-```
-
-### Suggested Frameworks / Libraries
-* React
-* Reactstrap
-
-### Submission Instructions
-* Share the repository link and public url of the deployed application with your point of contact at Stable
-
-Good luck!
+- [cloud-blaze](https://github.com/thekelvinliu/cloud-blaze):
+  cloudflare workers handler for proxying requests to backblaze b2
+- [fastify](https://github.com/fastify/fastify): fast server (for dev server)
+- [vite](https://github.com/vitejs/vite): fast ui tool
+- [yarn](https://github.com/yarnpkg/yarn): package management and script runner

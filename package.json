@@ -1,0 +1,51 @@
+{
+  "name": "stable-demo",
+  "version": "1.0.0",
+  "description": "coding exercise for stable",
+  "main": "src/worker.js",
+  "repository": "git@github.com:thekelvinliu/stable-code-exercise.git",
+  "author": "kelvin liu <kelvin@thekelvinliu.com> (https://www.thekelvinliu.com)",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "yarn build:server && yarn generate && yarn build:client",
+    "build:client": "vite build --base=/app/ --outDir bucket",
+    "build:server": "vite build --base=/app/ --outDir dist --ssr src/server-html.jsx",
+    "clean": "rm -rf bucket dist worker index.html",
+    "deploy": "wrangler publish -e prod",
+    "dev": "esr scripts/dev.js",
+    "generate": "esr scripts/generate.js",
+    "lint": "eslint",
+    "reset": "rm -rf node_modules yarn.lock",
+    "test": "echo 'there are no tests for this demo project, sorry :('"
+  },
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "cloud-blaze": "^0.2.1",
+    "fastify": "^3.21.6",
+    "prop-types": "^15.7.2",
+    "rambda": "^6.9.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "reactstrap": "^8.10.0",
+    "zustand": "^3.5.10"
+  },
+  "devDependencies": {
+    "@cloudflare/wrangler": "^1.19.3",
+    "@vitejs/plugin-react": "^1.0.1",
+    "esbuild": "^0.13.2",
+    "esbuild-runner": "^2.2.1",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "middie": "^5.3.0",
+    "prettier": "^2.4.1",
+    "sass": "^1.42.1",
+    "vite": "^2.5.10"
+  }
+}
